@@ -1,0 +1,15 @@
+{
+  "info": {
+    "title": "Misys International V2",
+    "version": "1.0.0",
+    "description": "HBL Misys Services V2 International"
+  },
+  "basePath": "/",
+  "swagger": "2.0",
+  "paths": {},
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}

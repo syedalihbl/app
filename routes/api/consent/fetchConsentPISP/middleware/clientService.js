@@ -1,0 +1,50 @@
+const config = require('config');
+
+const APIUtil = require('../../../../../common/utils/apiUtil')
+const APIError = require('../../../../../common/model/apiError')
+const APIResponse = require('../../../../../common/model/apiResponse')
+
+const Client = require('../../../../../clients/client')
+const ClientResponse = require('./transformation/response')
+
+class ClientService {
+
+    constructor(clientName, logger) {
+        this.logger = logger;
+
+        this.logger.debug({ clientName: clientName }, 'fetchConsentPISP clientName');
+        this.client = new Client(clientName, {}, this.logger);
+    }
+
+    async perform(apiRequest) {
+        this.logger.debug({ apiRequest: apiRequest }, 'ClientService perform method invoked with parameters')
+        if (apiRequest.headers.xCountryCode.toUpperCase() === 'BAH') {
+            // const clientRequest = new ClientRequest(this.logger)
+            
+            // Get Config Property Values
+            const requestURL = config.get('api.fetchConsentPISP.v1.url')
+            const requestMethod = config.get('api.fetchConsentPISP.v1.method')
+            // const requestHeaders = apiRequest.headers
+            // const requestPayload = clientRequest.getPayloadRequest(apiRequest)
+
+            const result = await this.client.performRestRequest({}, {}, requestMethod, `${requestURL}${apiRequest.body.consentId}`,)
+            
+            this.logger.info('Client Recieved Response', result);
+
+            if (result.error) {
+                return result;
+            }
+            const clientResponse = new ClientResponse(this.logger)
+            this.logger.debug({ clientResponse: clientResponse }, 'ClientResponse Object Constructed')
+            var returnresult = clientResponse.getPayloadResponse(apiRequest.headers, result);
+
+            //console.log(returnresult, "===================")
+            return returnresult
+
+        } else {
+
+        }
+    }
+}
+
+module.exports = ClientService

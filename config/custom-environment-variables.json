@@ -1,0 +1,94 @@
+{
+    "api": {
+        "accountStatement": {
+            "v1": {
+                "url": "ACCSTATEMENTV1_URL"
+            }
+        },
+        "accountholders": {
+            "v1": {
+                "url": "ACCHOLDER_URL"
+            }
+        },
+        "accountholdersUAE": {
+            "v1": {
+                "url": "ACCHOLDERUAE_URL"
+            }
+        },
+        "accountDetailsUAE": {
+            "v1": {
+                "url": "ACCDETAILSUAE_URL"
+            }
+        },
+        "accountDetailsBah": {
+            "v1": {
+                "url": "ACCDETAILSBAH_URL"
+            }
+        },
+        "accountListBah": {
+            "v1": {
+                "url": "ACCLISTBAH_URL"
+            }
+        },
+        "userLogin": {
+            "v1": {
+                "url": "USERLOGIN_URL"
+            }
+        },
+        "accountValidate": {
+            "v1": {
+                "url": "ACCVALIDATE_URL"
+            }
+        },
+        "accountBalance": {
+            "v1": {
+                "url": "ACCBALANCE_URL"
+            }
+        },
+        "accStatement": {
+            "v2": {
+                "url": "ACCSTATEMENT_URL"
+            }
+        },
+        "accountBalanceUAE": {
+            "v1": {
+                "url": "ACCBALANCEUAE_URL"
+            }
+        },
+        "accountValidateUAE": {
+            "v1": {
+                "url": "ACCVALIDATEUAE_URL"
+            }
+        },
+        "accStatementUAE": {
+            "v2": {
+                "url": "ACCSTATEMENTUAE_URL"
+            }
+        },
+        "eCheck": {
+            "v1": {
+                "url": "ECHECK_URL"
+            }
+        },
+        "customerDemographicUAE": {
+            "v1": {
+                "url": "CUSTOMERDEMOGRAPHICUAE_URL"
+            }
+        },
+        "debittransaction": {
+            "v1": {
+                "url": "DEBITLIEN_URL"
+            }
+        },
+        "customerdetailbyaccountv2": {
+            "v1": {
+                "url": "CUSTOMERDETAILSV2_URL"
+            }
+        },
+        "accountBalancBAHv2": {
+            "v2": {
+                "url": "ACCOUNTBALANCEBAHV2_URL"
+            }
+        }
+    }
+}

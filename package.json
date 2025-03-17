@@ -1,0 +1,50 @@
+{
+  "name": "misys_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cluster.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint routes --ext .js",
+    "lint:fix": "eslint routes --ext .js --fix",
+    "swagger": "swagger-jsdoc -d swaggerDef.js -o swagger.yaml"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@clinic/doctor": "^11.0.0",
+    "@log4js-node/smtp": "^1.1.0",
+    "config": "^2.0.2",
+    "debug": "^4.4.0",
+    "express": "^4.16.3",
+    "express-joi-validation": "^2.0.0",
+    "express-pino-logger": "^4.0.0",
+    "express-validator": "^5.3.0",
+    "https": "^1.0.0",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.3.0",
+    "log4js": "^3.0.6",
+    "perf_hooks": "^0.0.1",
+    "pino": "^5.13.1",
+    "pino-multi-stream": "^4.2.0",
+    "promise": "^8.0.1",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.4",
+    "soap": "^0.25.0",
+    "stjs": "0.0.5",
+    "swagger-jsdoc": "^3.4.0",
+    "xml2json": "^0.11.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.5",
+    "nodemon": "^2.0.2"
+  }
+}

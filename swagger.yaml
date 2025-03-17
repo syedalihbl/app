@@ -1,0 +1,1734 @@
+openapi: 3.0.1
+info:
+  title: Misys International V2
+  version: 1.0.0
+  description: 'This catalog includes all the misys  related services '
+  contact:
+    email: open.apis@hbl.com
+servers:
+  - url: 'https://apis1.hbl.com:8343'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    '400':
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: '02'
+              description: Alpha numeric value for any specific validation case
+            message:
+              type: string
+              example: xReqId is required
+              description: Human readable message recieved from targeted/Internal system
+            type:
+              type: string
+              example: ValidationError
+              description: Identification for error type
+            reqId:
+              type: string
+              example: '12345678910123'
+              description: Request Id that was used in making an API call
+            developer_message:
+              type: string
+              example: >-
+                {"message": "xReqId is
+                required","path":["xReqId"],"type":"any.required","context":{"key":"xReqId","label":"xReqId"}}
+              description: >-
+                Error/Fault Object recieved/generated from target/internal
+                system
+    '401':
+      type: object
+      properties:
+        message:
+          type: string
+          example: Unauthorized Error
+          description: As per response code
+    '403':
+      type: object
+      properties:
+        message:
+          type: string
+          example: Invalid signature
+          description: As per response code
+    '406':
+      type: object
+      properties:
+        message:
+          type: string
+          example: Fail
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: '02'
+              description: Alpha numeric value for any specific validation case
+            message:
+              type: string
+              example: Duplicate Reference No
+              description: Human readable message recieved from targeted/Internal system
+            type:
+              type: string
+              example: TargetSystemValidationError
+              description: Identification for error type
+            reqId:
+              type: string
+              example: '232311882312'
+              description: Request Id that was used in making an API call
+            developer_message:
+              type: string
+              example: >-
+                {"OUTPUTPARM":{"REPCODE":"0000003","REPMESSAGE":"Duplicate
+                Reference No","UNQREFERENCE1":""}}
+              description: Error/Fault/Response Object recieved from target system
+    '500':
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: ''
+              description: Alpha numeric value for any specific validation case
+            message:
+              type: string
+              example: >-
+                Something went wrong to fullfull the results, Kindly contact
+                with administrator.
+              description: Human readable message recieved from targeted/Internal system
+            type:
+              type: string
+              example: APIInternalError
+              description: Identification for error type
+            reqId:
+              type: string
+              example: '232311882312'
+              description: Request Id that was used in making an API call
+            developer_message:
+              type: string
+              example: >-
+                Invocation of program failed. AS400Message (ID: CEE9901 text:
+                Application error.  MCH3601 unmonitored by WCUSTEQ at statement
+                0000018000, instruction
+                X'0000'.):com.ibm.as400.access.AS400Message@39d70d4b
+              description: Error/Fault/Response Object recieved from target system
+    '501':
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: ''
+              description: Alpha numeric value for any specific validation case
+            message:
+              type: string
+              example: Target System Service is not available
+              description: Human readable message recieved from targeted/Internal system
+            type:
+              type: string
+              example: JSONValidation
+              description: Identification for error type
+            reqId:
+              type: string
+              example: '1234567'
+              description: Request Id that was used in making an API call
+            developer_message:
+              type: string
+              example: >-
+                <html><head><title>404 Not Found</title></head><body><h1>Not
+                Found</h1><p> </p></body></html>
+              description: Error/Fault/Response Object recieved from target system
+    '502':
+      type: object
+      properties:
+        message:
+          type: string
+          example: An invalid response was received from the upstream server
+          description: Human readable message recieved from targeted/Internal system
+    '503':
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: ''
+              description: Alpha numeric value for any specific validation case
+            message:
+              type: string
+              example: >-
+                Middleware System throw an exception while reaching to target
+                system
+              description: Human readable message recieved from targeted/Internal system
+            type:
+              type: string
+              example: TargetSystemError
+              description: Identification for error type
+            reqId:
+              type: string
+              example: '1234567'
+              description: Request Id that was used in making an API call
+            developer_message:
+              type: string
+              example: >-
+                RequestError: Error: at new RequestError
+                (/app/node_modules/request-promise-core/lib/errors.js:14:15)
+                    at Request.plumbing.callback (/app/node_modules/request-promise-core/lib/plumbing.js:87:29)
+                    at Request.RP$callback [as _callback] (/app/node_modules/request-promise-core/lib/plumbing.js:46:31)
+                    at self.callback (/app/node_modules/request/request.js:185:22)
+                    at emitOne (events.js:116:13)
+                    at Request.emit (events.js:211:7)
+                    at Timeout._onTimeout (/app/node_modules/request/request.js:852:16)
+                    at ontimeout (timers.js:498:11)
+                    at tryOnTimeout (timers.js:323:5)
+                    at Timer.listOnTimeout (timers.js:290:5)"}
+              description: Error/Fault/Response Object recieved from target system
+    '504':
+      type: object
+      properties:
+        message:
+          type: string
+          example: The upstream server is timing out
+          description: Human readable message recieved from targeted/Internal system
+    '598':
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: ESOCKETTIMEDOUT
+              description: Alpha numeric value for any specific validation case
+            message:
+              type: string
+              example: Target System Error
+              description: Human readable message recieved from targeted/Internal system
+            type:
+              type: string
+              example: ReadTimeout
+              description: Identification for error type
+            reqId:
+              type: string
+              example: '1234567'
+              description: Request Id that was used in making an API call
+            developer_message:
+              type: string
+              example: |-
+                RequestError: Error: ETIMEDOUT
+                    at new RequestError (/app/node_modules/request-promise-core/lib/errors.js:14:15)
+                    at Request.plumbing.callback (/app/node_modules/request-promise-core/lib/plumbing.js:87:29)
+                    at Request.RP$callback [as _callback] (/app/node_modules/request-promise-core/lib/plumbing.js:46:31)
+                    at self.callback (/app/node_modules/request/request.js:185:22)
+                    at emitOne (events.js:116:13)
+                    at Request.emit (events.js:211:7)
+                    at Timeout._onTimeout (/app/node_modules/request/request.js:852:16)
+                    at ontimeout (timers.js:498:11)
+                    at tryOnTimeout (timers.js:323:5)
+                    at Timer.listOnTimeout (timers.js:290:5)"}
+              description: Error/Fault/Response Object recieved from target system
+    '599':
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: ECONNREFUSED
+              description: Alpha numeric value for any specific validation case
+            message:
+              type: string
+              example: Connection timeout
+              description: Human readable message recieved from targeted/Internal system
+            type:
+              type: string
+              example: ConnectTimeout
+              description: Identification for error type
+            reqId:
+              type: string
+              example: '1234567'
+              description: Request Id that was used in making an API call
+            developer_message:
+              type: string
+              example: >-
+                RequestError: Error: connect ECONNREFUSED at new RequestError
+                (/app/node_modules/request-promise-core/lib/errors.js:14:15)
+                    at Request.plumbing.callback (/app/node_modules/request-promise-core/lib/plumbing.js:87:29)
+                    at Request.RP$callback [as _callback] (/app/node_modules/request-promise-core/lib/plumbing.js:46:31)
+                    at self.callback (/app/node_modules/request/request.js:185:22)
+                    at emitOne (events.js:116:13)
+                    at Request.emit (events.js:211:7)
+                    at Request.onRequestError (/app/node_modules/request/request.js:881:8)
+                    at emitOne (events.js:121:20)
+                    at ClientRequest.emit (events.js:211:7)
+                    at Socket.socketErrorListener (_http_client.js:387:9)
+                    at emitOne (events.js:116:13)
+                    at Socket.emit (events.js:211:7)
+                    at emitErrorNT (internal/streams/destroy.js:66:8)
+                    at _combinedTickCallback (internal/process/next_tick.js:139:11)
+                    at process._tickCallback (internal/process/next_tick.js:181:9)"}
+              description: Error/Fault/Response Object recieved from target system
+tags: []
+paths:
+  '/sandbox/api/v1/customer/demographic/byemiratid/{cif}':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Demographic - UAE
+      summary: The service is used for Get Demographic - UAE
+      parameters:
+        - name: cif
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '784198497306203'
+        - name: x-req-id
+          in: header
+          description: >-
+            The x-req-id helps the server to log the request with unique
+            identifier and is of max 40 chars
+          required: true
+          schema:
+            type: string
+            example: '00001'
+        - name: x-channel-id
+          in: header
+          description: >-
+            The x-channel-id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: IB
+        - name: x-sub-channel-id
+          in: header
+          description: >-
+            The x-sub-channel-id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: IB
+        - name: x-country-code
+          in: header
+          description: >-
+            It is the country short code. In your case it will be 'PK' and is of
+            max 3 chars
+          required: true
+          schema:
+            type: string
+            example: UAE
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                    description: Response description i.e successful
+                  data:
+                    type: object
+                    properties:
+                      firstName:
+                        type: string
+                        example: MUHAMMAD OMAR
+                      middleName:
+                        type: string
+                        example: ''
+                      lastName:
+                        type: string
+                        example: QASIM
+                      dateOfBirth:
+                        type: string
+                        example: 0841103
+                      countryofBirth:
+                        type: string
+                        example: 17
+                      residentStatus:
+                        type: string
+                        example: 1
+                      countryOfIssuance:
+                        type: string
+                        example: CA
+                      dateOfIssuance:
+                        type: string
+                        example: 1150506
+                      dateOfExpiry:
+                        type: string
+                        example: 1200504
+                      emiratesIDNumber:
+                        type: string
+                        example: 784198497306203
+                      dateofEmiratesIDExpiry:
+                        type: string
+                        example: 1200909
+                      currResAddressCountry:
+                        type: string
+                        example: AE
+                      currResAddressEmirate:
+                        type: string
+                        example: U004
+                      currResAddressCity:
+                        type: string
+                        example: U004
+                      currResAddressStreet:
+                        type: string
+                        example: '380, VILLA 4, BAYTI 40 FIRST AL'
+                      currResAddressPOBox:
+                        type: string
+                        example: 11987
+                      telephoneNumberLandline:
+                        type: string
+                        example: 0097143043100
+                      employeePhoneNumberDirect:
+                        type: string
+                        example: 0097143043100
+                      employeePhoneNumberGeneral:
+                        type: string
+                        example: 0097143043100
+                      regularSalIncome:
+                        type: string
+                        example: 61200
+                      businessPhoneNumberGeneral:
+                        type: string
+                        example: ''
+                      businessEmailAddress:
+                        type: string
+                        example: ''
+                      businessAddressCountry:
+                        type: string
+                        example: ''
+                      businessAddressCity:
+                        type: string
+                        example: ''
+                      businessAddressStreet:
+                        type: string
+                        example: ''
+                      businessAddressPOBox:
+                        type: string
+                        example: ''
+                      nationality:
+                        type: string
+                        example: PK
+                      otherNationality:
+                        type: string
+                        example: CA
+                      countryofResidence:
+                        type: string
+                        example: AE
+                      mailingAddressCountry:
+                        type: string
+                        example: ''
+                      mailingAddressEmirate:
+                        type: string
+                        example: ''
+                      mailingAddressCity:
+                        type: string
+                        example: ''
+                      mailingAddressStreet:
+                        type: string
+                        example: ''
+                      mailingAddressType:
+                        type: string
+                        example: ''
+                      mailingAddressApartment:
+                        type: string
+                        example: ''
+                      mailingAddressPOBox:
+                        type: string
+                        example: ''
+                      employerName:
+                        type: string
+                        example: PWC
+                      industryOfEmployer:
+                        type: string
+                        example: ''
+                      otherIncomeAED:
+                        type: string
+                        example: ''
+                      industryOfBusiness:
+                        type: string
+                        example: 5
+                      businessAddressEmirate:
+                        type: string
+                        example: ''
+                      primaryPurposeOfOpeningAccount:
+                        type: string
+                        example: ''
+                      estimateOfWealthinAED:
+                        type: string
+                        example: ''
+                      nameoftheBank:
+                        type: string
+                        example: HSBC
+                      typeOfAccounts:
+                        type: string
+                        example: ''
+                      areYouaUsPassportHolder:
+                        type: string
+                        example: ''
+                      areYouaUsGreenCardHolder:
+                        type: string
+                        example: ''
+                      monthlyIncomeFromBusinessAED:
+                        type: string
+                        example: EA
+                      otherAnnucalIncome:
+                        type: string
+                        example: 1212
+                      anticipatedmonthlyCrossBorderTransactionAED:
+                        type: string
+                        example: 61200
+                      monthlyCreditTurnover:
+                        type: string
+                        example: 61200
+                      profession:
+                        type: string
+                        example: 23
+                      areYouATaxresdientInUSA:
+                        type: string
+                        example: 'Y'
+                      taxIdentificationNumber:
+                        type: string
+                        example: ''
+                      tin:
+                        type: string
+                        example: 'Y'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          description: Invalid Signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '406':
+          description: Target System Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406'
+        '500':
+          description: Unspecified Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+        '501':
+          description: JSON Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/502'
+        '503':
+          description: Target System Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503'
+        '504':
+          description: Gateway Time-out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/504'
+        '598':
+          description: Read Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/598'
+        '599':
+          description: Connection Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/599'
+  '/sandbox/api/v2/account/balance/{accountNo}':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Account Balance - UAE
+      summary: The service is used for Get Account Balance - UAE
+      parameters:
+        - name: accountNo
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '20117770378201'
+        - name: x-req-id
+          in: header
+          description: >-
+            The x-req-id helps the server to log the request with unique
+            identifier and is of max 40 chars
+          required: true
+          schema:
+            type: string
+            example: '00001'
+        - name: x-channel-id
+          in: header
+          description: >-
+            The x-channel-id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-sub-channel-id
+          in: header
+          description: >-
+            The x-sub-channel-id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-country-code
+          in: header
+          description: >-
+            It is the country short code. In your case it will be 'PK' and is of
+            max 3 chars
+          required: true
+          schema:
+            type: string
+            example: UAE
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                    description: Response description i.e successful
+                  data:
+                    type: object
+                    properties:
+                      accountNo:
+                        type: string
+                        example: 20117770378201
+                      accountCurrency:
+                        type: string
+                        example: AED
+                      accountBookBalance:
+                        type: string
+                        example: ''
+                      accountHoldAmount:
+                        type: string
+                        example: ''
+                      accountNetBalance:
+                        type: string
+                        example: ''
+                      accountCurrentBalance:
+                        type: string
+                        example: ''
+                      accountAvailableBalance:
+                        type: string
+                        example: 00000000019996060
+                      accountMinimumBalance:
+                        type: string
+                        example: ''
+                      accountUnClearedFund:
+                        type: string
+                        example: ''
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          description: Invalid Signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '406':
+          description: Target System Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406'
+        '500':
+          description: Unspecified Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+        '501':
+          description: JSON Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/502'
+        '503':
+          description: Target System Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503'
+        '504':
+          description: Gateway Time-out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/504'
+        '598':
+          description: Read Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/598'
+        '599':
+          description: Connection Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/599'
+  '/sandbox/api/v1/customer/echeck/{customerName}':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - E-CHECK BAHRAIN - V1
+      summary: The service is used for E-CHECK BAHRAIN V1 .
+      parameters:
+        - name: x-req-id
+          in: header
+          description: >-
+            The req Id helps the server to log the request with unique
+            identifier and is of max 40 chars
+          required: true
+          schema:
+            type: string
+            example: '00001'
+        - name: x-channel-id
+          in: header
+          description: >-
+            The channel Id helps the server to validate the request with unique
+            channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-sub-channel-id
+          in: header
+          description: >-
+            The sub channel Id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-country-code
+          in: header
+          description: >-
+            It is the country short code. In your case it will be 'PK' and is of
+            max 3 chars
+          required: true
+          schema:
+            type: string
+            example: BAH
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                    description: Response description i.e successful
+                  data:
+                    type: object
+                    properties:
+                      customerName:
+                        type: string
+                        example: MUHAMMAD UMER DRAZ
+                        description: Name of Customer
+                      accountType:
+                        type: string
+                        example: BH
+                        description: Account Type
+                      accountTitle:
+                        type: string
+                        example: INDIVIDUAL
+                        description: Title of Account
+                      addressLine1:
+                        type: string
+                        example: FLAT 11 BLDG 1657 ROAD 153 BLOCK 90
+                        description: particulars1
+                      addressLine2:
+                        type: string
+                        example: 1 RIFFA AL HUNAYNIYAH
+                        description: Address Line 2
+                      addressLine3:
+                        type: string
+                        example: KINGDOM OF BAHRAIN
+                        description: Address Line 3
+                      addressLine4:
+                        type: string
+                        example: ''
+                        description: Address Line 4
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            bankCode:
+                              type: string
+                              example: BH10HABB20017000000603
+                              description: Code of Bank
+                            bankName:
+                              type: string
+                              example: '2001'
+                              description: Name of Bank
+                            accountNumber:
+                              type: string
+                              example: '20017000000603'
+                              description: Customer Account Number
+                            accountType:
+                              type: string
+                              example: CURRENT ACCOUNT
+                              description: Type of Account
+                            accountStatus:
+                              type: string
+                              example: 'Y'
+                              description: Status of Account
+                            accountCurrecy:
+                              type: string
+                              example: BHD
+                              description: Currency of Account
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          description: Invalid Signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '406':
+          description: Target System Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406'
+        '500':
+          description: Unspecified Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+        '501':
+          description: JSON Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/502'
+        '503':
+          description: Target System Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503'
+        '504':
+          description: Gateway Time-out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/504'
+        '598':
+          description: Read Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/598'
+        '599':
+          description: Connection Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/599'
+  /sandbox/api/v2/payment/fundtransfer/transaction:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Fund Transfer Bahrain
+      summary: The service is used for Fund Transfer Bahrain .
+      parameters:
+        - name: x-req-id
+          in: header
+          description: >-
+            The req Id helps the server to log the request with unique
+            identifier and is of max 40 chars
+          required: true
+          schema:
+            type: string
+            example: '00001'
+        - name: x-channel-id
+          in: header
+          description: >-
+            The channel Id helps the server to validate the request with unique
+            channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-sub-channel-id
+          in: header
+          description: >-
+            The sub channel Id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-country-code
+          in: header
+          description: >-
+            It is the country short code. In your case it will be 'PK' and is of
+            max 3 chars
+          required: true
+          schema:
+            type: string
+            example: BAH
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                initiatingUserId:
+                  type: string
+                  example: WSPT
+                  description: Initiating User ID
+                transactionInitiatedBranch:
+                  type: string
+                  example: '2006'
+                  description: Branch of Transaction
+                postingUserReference:
+                  type: string
+                  example: WSPT
+                  description: Posting User Reference
+                transactionDate:
+                  type: string
+                  example: ''
+                  description: Transaction Date
+                transactionTime:
+                  type: string
+                  example: ''
+                  description: Transaction Time
+                transactionAmount:
+                  type: string
+                  example: 8192
+                  description: Transaction Amount
+                debitAccountNo:
+                  type: string
+                  example: '21047000000401'
+                  description: Debit Account Number
+                debitTransactionCode:
+                  type: string
+                  example: '020'
+                  description: debit Transaction Code
+                debitRecordReference:
+                  type: string
+                  example: ''
+                  description: Debit Record Reference
+                debitValueDate:
+                  type: string
+                  example: ''
+                  description: Debit Value Date
+                debitCurrency:
+                  type: string
+                  example: ''
+                  description: Debit Currency
+                debitNarration1:
+                  type: string
+                  example: string
+                  description: Debit Narration 1
+                debitNarration2:
+                  type: string
+                  example: string
+                  description: Debit Narration 2
+                debitNarration3:
+                  type: string
+                  example: string
+                  description: Debit Narration 3
+                debitNarration4:
+                  type: string
+                  example: string
+                  description: Debit Narration 4
+                creditAccountNo:
+                  type: string
+                  example: '20017000000603'
+                  description: Credit Account Number
+                creditTransactionCode:
+                  type: string
+                  example: '520'
+                  description: credit Transaction Code
+                creditRecordReference:
+                  type: string
+                  example: ''
+                  description: Credit Record Reference
+                creditValueDate:
+                  type: string
+                  example: ''
+                  description: credit Value Date
+                creditCurrency:
+                  type: string
+                  example: ''
+                  description: credit Currency
+                creditNarration1:
+                  type: string
+                  example: string
+                  description: credit Narration 1
+                creditNarration2:
+                  type: string
+                  example: string
+                  description: credit Narration 2
+                creditNarration3:
+                  type: string
+                  example: string
+                  description: credit Narration 3
+                creditNarration4:
+                  type: string
+                  example: string
+                  description: credit Narration 4
+                batchNo:
+                  type: string
+                  example: ''
+                  description: Batch Number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                    description: Response description i.e successful
+                  data:
+                    type: object
+                    properties:
+                      uniqueReferenceId:
+                        type: string
+                        example: 1212
+                      responseCode:
+                        type: string
+                        example: 0
+                      responseDescription:
+                        type: string
+                        example: Successfully processed transaction
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          description: Invalid Signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '406':
+          description: Target System Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406'
+        '500':
+          description: Unspecified Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+        '501':
+          description: JSON Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/502'
+        '503':
+          description: Target System Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503'
+        '504':
+          description: Gateway Time-out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/504'
+        '598':
+          description: Read Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/598'
+        '599':
+          description: Connection Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/599'
+  '/sandbox/api/v1/customer/detail/{accountno}':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Customer Detail By Account BAHRAIN- V1
+      summary: The service is used for Customer Details BAHRAIN V1 .
+      parameters:
+        - name: x-req-id
+          in: header
+          description: >-
+            The req Id helps the server to log the request with unique
+            identifier and is of max 40 chars
+          required: true
+          schema:
+            type: string
+            example: '00001'
+        - name: x-channel-id
+          in: header
+          description: >-
+            The channel Id helps the server to validate the request with unique
+            channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-sub-channel-id
+          in: header
+          description: >-
+            The sub channel Id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: MB
+        - name: x-country-code
+          in: header
+          description: >-
+            It is the country short code. In your case it will be 'PK' and is of
+            max 3 chars
+          required: true
+          schema:
+            type: string
+            example: BAH
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                    description: Response description i.e successful
+                  data:
+                    type: object
+                    properties:
+                      accountTitle:
+                        type: string
+                        example: NOOR MOHAMMED
+                        description: Account Title for Customer
+                      accountStatus:
+                        type: string
+                        example: 'N'
+                        description: Account Current Status
+                      branchCode:
+                        type: string
+                        example: '2006'
+                        description: Branch Code where this account number is openned
+                      customerType:
+                        type: string
+                        example: EA
+                        description: Customer Type
+                      documentId:
+                        type: string
+                        example: '710234880'
+                        description: Document ID
+                      idTypeDescription:
+                        type: string
+                        example: '01'
+                        description: ID type Description
+                      dateOfBirth:
+                        type: string
+                        example: '01012016'
+                        description: Date of Birth of primary account holder
+                      primaryEmailAddress:
+                        type: string
+                        example: BTUAT@GMAIL.COM
+                        description: Primary Email Address
+                      primaryMobileNumber:
+                        type: string
+                        example: 009733424792
+                        description: Primary Mobile Number
+                      availableBalanceOfPayer:
+                        type: string
+                        example: '000000005000000'
+                        description: Available Balance of Payer
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          description: Invalid Signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '406':
+          description: Target System Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406'
+        '500':
+          description: Unspecified Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+        '501':
+          description: JSON Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/502'
+        '503':
+          description: Target System Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503'
+        '504':
+          description: Gateway Time-out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/504'
+        '598':
+          description: Read Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/598'
+        '599':
+          description: Connection Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/599'
+  '/sandbox/api/v2/customer/detail/{accountno}':
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Customer Detail By Account BAHRAIN- V2
+      summary: The service is used for Customer Details BAHRAIN V2 .
+      parameters:
+        - name: x-req-id
+          in: header
+          description: >-
+            The req Id helps the server to log the request with unique
+            identifier and is of max 40 chars
+          required: true
+          schema:
+            type: string
+            example: '00001'
+        - name: x-channel-id
+          in: header
+          description: >-
+            The channel Id helps the server to validate the request with unique
+            channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: BPAY
+        - name: x-sub-channel-id
+          in: header
+          description: >-
+            The sub channel Id helps the server to validate the request with
+            unique channel source. It is of max 6 chars
+          required: true
+          schema:
+            type: string
+            example: BPAY
+        - name: x-country-code
+          in: header
+          description: >-
+            It is the country short code. In your case it will be 'PK' and is of
+            max 3 chars
+          required: true
+          schema:
+            type: string
+            example: BAH
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                    description: Response description i.e successful
+                  data:
+                    type: object
+                    properties:
+                      accountTitle:
+                        type: string
+                        example: NOOR MOHAMMED
+                        description: Account Title for Customer
+                      accountStatus:
+                        type: string
+                        example: 'N'
+                        description: Account Current Status
+                      branchCode:
+                        type: string
+                        example: '2006'
+                        description: Branch Code where this account number is openned
+                      customerType:
+                        type: string
+                        example: EA
+                        description: Customer Type
+                      addressLine1:
+                        type: string
+                        example: EA
+                        description: Customer Type
+                      addressLine2:
+                        type: string
+                        example: EA
+                        description: Customer Type
+                      addressLine3:
+                        type: string
+                        example: EA
+                        description: Customer Type
+                      addressLine4:
+                        type: string
+                        example: EA
+                        description: Customer Type
+                      documentId:
+                        type: string
+                        example: '710234880'
+                        description: Document ID
+                      idTypeDescription:
+                        type: string
+                        example: '01'
+                        description: ID type Description
+                      dateOfBirth:
+                        type: string
+                        example: '01012016'
+                        description: Date of Birth of primary account holder
+                      primaryEmailAddress:
+                        type: string
+                        example: BTUAT@GMAIL.COM
+                        description: Primary Email Address
+                      primaryMobileNumber:
+                        type: string
+                        example: 009733424792
+                        description: Primary Mobile Number
+                      availableBalanceOfPayer:
+                        type: string
+                        example: '000000005000000'
+                        description: Available Balance of Payer
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          description: Invalid Signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '406':
+          description: Target System Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406'
+        '500':
+          description: Unspecified Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+        '501':
+          description: JSON Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/502'
+        '503':
+          description: Target System Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503'
+        '504':
+          description: Gateway Time-out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/504'
+        '598':
+          description: Read Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/598'
+        '599':
+          description: Connection Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/599'
+  /sandbox/api/V1/payment/debit/transaction/lien:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Debit Transaction Lien UK
+      summary: The service is used for Debit Transaction Lien UK .
+      parameters:
+        - name: x-req-id
+          in: header
+          description: >-
+            The x-req-id field helps the server to log the request with the
+            unique identifier.  It is min of 12 and max of 40 alphanumerics
+            characters, so it is mandatory that the value must be a
+            non-repetitive number of at least 12 characters.           
+          required: true
+          schema:
+            type: string
+            example: <ChannelId>_123456789012
+        - name: x-channel-id
+          in: header
+          description: >-
+            The x-channel-id field helps the server to validate the request with
+            unique channel source.  It is a min of 2 and max of 6 characters.
+            For channel Id value, source team needs to contact with the
+            Middleware team.
+          required: true
+          schema:
+            type: string
+            example: OB
+        - name: x-sub-channel-id
+          in: header
+          description: >-
+            The x-sub-channel-id field helps the server to validate the request
+            with unique channel source.  It is a min of 2 and max of 6
+            characters. For sub channel Id value, source team needs to contact
+            with the Middleware team.
+             
+          required: true
+          schema:
+            type: string
+            example: OB
+        - name: x-country-code
+          in: header
+          description: >-
+            The x-country-code field is the country short code. It is a min 2
+            chars and max 3 characters and in your case it will be 'UK'. For
+            others, please contact with the Middleware team.
+          required: true
+          schema:
+            type: string
+            example: UK
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+                  example: WSPT
+                  description: Initiating User ID
+                branch:
+                  type: string
+                  example: '2401'
+                  description: Branch of Transaction
+                postingUserReference:
+                  type: string
+                  example: WSPT
+                  description: Posting User Reference
+                reqDate:
+                  type: string
+                  example: '20210420'
+                  description: Request Date
+                reqTime:
+                  type: string
+                  example: '150315'
+                  description: Request Time
+                accountNo:
+                  type: string
+                  example: 21069978864228
+                  description: Account Number of bank
+                deptCode:
+                  type: string
+                  example: ACC
+                  description: Debit Account Code
+                reasonHold:
+                  type: string
+                  example: '011'
+                  description: Reason of Hold
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+                    description: Response description i.e successful
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        holdNumber:
+                          type: string
+                          example: '001'
+                          description: Hold Number of Account
+                        holdList:
+                          type: string
+                          example: '001'
+                          description: List of Hold
+                        holdListDetail:
+                          type: string
+                          example: '001'
+                          description: Hold List Details
+                        holdInputDate:
+                          type: string
+                          example: '20200102'
+                          description: Input Hold Date
+                        holdStartDate:
+                          type: string
+                          example: '20200102'
+                          description: Start Date of Hold
+                        holdExpiryDate:
+                          type: string
+                          example: '9999999'
+                          description: Expiry Date of Hold
+                        holdAmount:
+                          type: string
+                          example: '000000000001600'
+                          description: hold Amount
+                        holdReasonCode:
+                          type: string
+                          example: ACC
+                          description: Reason of hold code
+                        holdCode:
+                          type: string
+                          example: '011'
+                          description: Hold Number of Account
+                        holdNarrative1:
+                          type: string
+                          example: Add hold till authorization.
+                          description: Hold Narrative 1
+                        holdNarrative2:
+                          type: string
+                          example: ''
+                          description: Hold Narrative 2
+                        holdNarrative3:
+                          type: string
+                          example: ''
+                          description: Hold Narrative 3
+                        holdNarrative4:
+                          type: string
+                          example: ''
+                          description: Hold Narrative 4
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400'
+        '401':
+          description: Unauthorized Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401'
+        '403':
+          description: Invalid Signature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403'
+        '406':
+          description: Target System Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406'
+        '500':
+          description: Unspecified Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500'
+        '501':
+          description: JSON Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/501'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/502'
+        '503':
+          description: Target System Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/503'
+        '504':
+          description: Gateway Time-out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/504'
+        '598':
+          description: Read Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/598'
+        '599':
+          description: Connection Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/599'

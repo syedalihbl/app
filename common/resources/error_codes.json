@@ -1,0 +1,30 @@
+[
+	{
+		"code": "0000",
+		"message": "Success"
+	},
+	{
+		"code": "0101",
+		"message": "Fail"
+	},
+	{
+		"code": "0102",
+		"message": "Connection Timeout"
+	},
+	{
+		"code": "0103",
+		"message": "Read Timeout"
+	},
+	{
+		"code": "0104",
+		"message": ""
+	},
+	{
+		"code": "0105",
+		"message": ""
+	},
+	{
+		"code": "0106",
+		"message": ""
+	}
+]

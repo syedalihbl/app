@@ -1,0 +1,100 @@
+[
+    {
+        "url": "/v2/account/list/:nationalityIdentityNo",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v2/account/balance/:account",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v2/bah/account/statement",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v3/payment/fundtransfer/transaction",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v2/bah/standing-orders",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v2/bah/account/:AccountId/standing-order",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v2/bah/accounts/:AccountId/supplementary-account-info",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v2/bah/accounts/:AccountId/direct-debits",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v2/bah/account/direct-debits",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v1/bah/account/:AccountId/transactions",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v1/consent/details/aisp/:consentId",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v1/consent/details/pisp/:consentId",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v1/consent/details/aisp",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    },
+    {
+        "url": "/v1/consent/details/pisp",
+        "allowedChannels": [
+            "MB",
+            "BAH"
+        ]
+    }
+]

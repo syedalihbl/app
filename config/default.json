@@ -1,0 +1,161 @@
+{
+  "PORT": 9156,
+  "PORTHTTPS": 9188,
+  "logging": {
+    "base_path": "logs/",
+    "detault_file": "server.log",
+    "level": "info"
+  },
+  "api": {
+    "accountListByCPR": {
+      "v2": {
+        "userID": "WSPT",
+        "method": "POST",
+        "api_type": "REST",
+        "allowedCountries": [
+          "BAH",
+          "MB"
+        ],
+        "url": "http://10.200.65.250:10105/web/services/AccountListByCPR123"
+      }
+    },
+    "accountBalanceBAHv2": {
+      "v2": {
+        "api_type": "REST",
+        "url": "http://10.200.65.250:10105/web/services/GetAccountDetails",
+        "method": "POST",
+        "allowedCountries": [
+          "BAH",
+          "MB"
+        ]
+      }
+    },
+    "accountStatementBAH": {
+      "v2": {
+        "method": "POST",
+        "api_type": "REST",
+        "allowedCountries": [
+          "BAH",
+          "MB"
+        ],
+        "url": "http://10.200.65.250:10105/web/services/AcStatementBAH/"
+      }
+    },
+    "fundTransferH2H": {
+      "v2": {
+        "method": "POST",
+        "userID": "POST",
+        "api_type": "REST",
+        "developedBy": "Laique",
+        "allowedCountries": [
+          "BAH",
+          "MB"
+        ],
+        "url": "http://10.200.65.250:10105/web/services/H2HFundTransfer"
+      }
+    },
+    "getStandingOrders": {
+      "api_type": "REST",
+      "url": "http://10.200.65.250:10105/web/services/BAH_GetStandingOrderByCPR",
+      "method": "POST",
+      "allowedCountries": [
+        "BAH",
+        "MB"
+      ]
+    },
+    "standingOrderByAcc": {
+      "v2": {
+        "api_type": "REST",
+        "url": "http://10.200.65.250:10105/web/services/BHGetStandingOrderByAccID",
+        "method": "POST",
+        "allowedCountries": [
+          "BAH",
+          "MB"
+        ]
+      }
+    },
+    "getSuplimentaryAccountInfo": {
+      "api_type": "REST",
+      "url": "http://10.200.65.250:10105/web/services/BAHGetSupplemantryAcc/",
+      "method": "POST",
+      "allowedCountries": [
+        "BAH",
+        "MB"
+      ]
+    },
+    "directDebitByAccount": {
+      "v1": {
+        "api_type": "REST",
+        "url": "http://10.200.65.250:10105/web/services/BAHGetDirectDebitByAcc/",
+        "method": "POST",
+        "allowedCountries": [
+          "BAH",
+          "MB"
+        ]
+      }
+    },
+    "directDebitByCIF": {
+      "v1": {
+        "api_type": "REST",
+        "url": "http://10.200.65.250:10105/web/services/GetDirectDebitByCIF/",
+        "method": "POST",
+        "allowedCountries": [
+          "BAH",
+          "MB"
+        ]
+      }
+    },
+    "fetchConsentAISP": {
+      "v1": {
+        "api_type": "REST",
+        "url": "http://10.9.166.53:9072/consentsdetailsAISP/",
+        "method": "GET",
+        "allowedChannels": [
+          "MB",
+          "BAH"
+        ]
+      }
+    },
+    "fetchConsentPISP": {
+      "v1": {
+        "api_type": "REST",
+        "url": "http://10.9.166.53:9072/consentsdetailsPISP/",
+        "method": "GET",
+        "allowedChannels": [
+          "MB",
+          "BAH"
+        ]
+      }
+    },
+    "updateConsentAISP": {
+      "v1": {
+        "api_type": "REST",
+        "url": "http://10.9.166.53:9072/consentsaccountdetails/",
+        "method": "POST",
+        "allowedChannels": [
+          "MB",
+          "BAH"
+        ]
+      }
+    },
+    "updateConsentPISP": {
+      "v1": {
+        "api_type": "REST",
+        "url": "http://10.9.166.53:9072/consentsaccountdetailsPISP",
+        "method": "POST",
+        "allowedChannels": [
+          "MB",
+          "BAH"
+        ]
+      }
+    }
+  },
+  "soap": {
+    "requestTimeOut": 10000,
+    "setProxy": false,
+    "proxy": "http://proxy3.domestic.hbl.com:8080"
+  },
+  "rest": {
+    "requestTimeOut": 30000
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "windows": {
+        "max": 100,
+        "duration": 60000
+    },
+    "record": {
+        "duration": 300,
+        "interval": 100
+    },
+    "collect": {
+        "heap": true,
+        "event-loop": true,
+        "memory": true
+    },
+    "auth": {
+        "port": 2999,
+        "token": "your-auth-token"
+    }
+}
