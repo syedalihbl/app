@@ -3,34 +3,39 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'your-nodejs-app'
-        REMOTE_SERVER = 'aaijaz@10.200.68.168:22'
+        REMOTE_SERVER = 'aaijaz@10.200.68.168'
         REMOTE_PATH = 'ALI/'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/syedalihbl/app.git'
+                git branch: 'main',
+                git 'https://github.com/syedalihbl/app.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %DOCKER_IMAGE% .'
+                script {
+                    sh "docker build -t ${DOCKER_IMAGE} ."
+                }
             }
         }
 
         stage('Save Docker Image') {
             steps {
-                bat 'docker save %DOCKER_IMAGE% > %DOCKER_IMAGE%.tar'
+                script {
+                    sh "docker save ${DOCKER_IMAGE} > ${DOCKER_IMAGE}.tar"
+                }
             }
         }
 
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
                 sshagent(['your-ssh-credentials-id']) {
-                    bat 'scp %DOCKER_IMAGE%.tar %REMOTE_SERVER%:%REMOTE_PATH%'
-                    bat 'scp docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
+                    sh "scp ${DOCKER_IMAGE}.tar ${REMOTE_SERVER}:${REMOTE_PATH}"
+                    sh "scp docker-compose.yml ${REMOTE_SERVER}:${REMOTE_PATH}"
                 }
             }
         }
@@ -38,7 +43,7 @@ pipeline {
         stage('Load Docker Image on Remote Server') {
             steps {
                 sshagent(['your-ssh-credentials-id']) {
-                    bat 'ssh %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar"'
+                    sh "ssh ${REMOTE_SERVER} 'docker load < ${REMOTE_PATH}/${DOCKER_IMAGE}.tar'"
                 }
             }
         }
@@ -46,7 +51,7 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 sshagent(['your-ssh-credentials-id']) {
-                    bat 'ssh %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
+                    sh "ssh ${REMOTE_SERVER} 'docker-compose -f ${REMOTE_PATH}/docker-compose.yml up -d'"
                 }
             }
         }
