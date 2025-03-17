@@ -10,8 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                git 'https://github.com/syedalihbl/app.git'
+                git branch: 'main',git 'https://github.com/syedalihbl/app.git'
             }
         }
 
