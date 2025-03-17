@@ -10,15 +10,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                git 'https://github.com/syedalihbl/app.git'
+                git branch: 'master', url: 'https://github.com/syedalihbl/app.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    docker.build("${DOCKER_IMAGE}")
                 }
             }
         }
