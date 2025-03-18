@@ -14,48 +14,44 @@ pipeline {
             }
         }
 
+
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("${DOCKER_IMAGE}")
-                }
+                bat 'docker build -t %DOCKER_IMAGE% .'
             }
         }
 
         stage('Save Docker Image') {
             steps {
-                script {
-                    sh "docker save ${DOCKER_IMAGE} > ${DOCKER_IMAGE}.tar"
-                }
+                bat 'docker save %DOCKER_IMAGE% > %DOCKER_IMAGE%.tar'
             }
         }
 
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
-                sshagent(['your-ssh-credentials-id']) {
-                    sh "scp ${DOCKER_IMAGE}.tar ${REMOTE_SERVER}:${REMOTE_PATH}"
-                    sh "scp docker-compose.yml ${REMOTE_SERVER}:${REMOTE_PATH}"
+                withCredentials([sshUserPrivateKey(credentialsId: 'your-ssh-credentials-id', keyFileVariable: 'SSH_KEY')]) {
+                    bat 'scp -i %SSH_KEY% %DOCKER_IMAGE%.tar %REMOTE_SERVER%:%REMOTE_PATH%'
+                    bat 'scp -i %SSH_KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
                 }
             }
         }
 
         stage('Load Docker Image on Remote Server') {
             steps {
-                sshagent(['your-ssh-credentials-id']) {
-                    sh "ssh ${REMOTE_SERVER} 'docker load < ${REMOTE_PATH}/${DOCKER_IMAGE}.tar'"
+                withCredentials([sshUserPrivateKey(credentialsId: 'your-ssh-credentials-id', keyFileVariable: 'SSH_KEY')]) {
+                    bat 'ssh -i %SSH_KEY% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar"'
                 }
             }
         }
 
         stage('Run Docker Compose') {
             steps {
-                sshagent(['your-ssh-credentials-id']) {
-                    sh "ssh ${REMOTE_SERVER} 'docker-compose -f ${REMOTE_PATH}/docker-compose.yml up -d'"
+                withCredentials([sshUserPrivateKey(credentialsId: 'your-ssh-credentials-id', keyFileVariable: 'SSH_KEY')]) {
+                    bat 'ssh -i %SSH_KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
                 }
             }
         }
     }
-
     post {
         always {
             cleanWs()
