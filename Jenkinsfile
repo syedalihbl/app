@@ -29,7 +29,7 @@ pipeline {
 
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 168, keyFileVariable: 'SSH_KEY')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: '168', keyFileVariable: 'SSH_KEY')]) {
                     bat 'scp -i %SSH_KEY% %DOCKER_IMAGE%.tar %REMOTE_SERVER%:%REMOTE_PATH%'
                     bat 'scp -i %SSH_KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
                 }
@@ -38,7 +38,7 @@ pipeline {
 
         stage('Load Docker Image on Remote Server') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 168, keyFileVariable: 'SSH_KEY')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: '168', keyFileVariable: 'SSH_KEY')]) {
                     bat 'ssh -i %SSH_KEY% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar"'
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Run Docker Compose') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 168, keyFileVariable: 'SSH_KEY')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: '168', keyFileVariable: 'SSH_KEY')]) {
                     bat 'ssh -i %SSH_KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
                 }
             }
