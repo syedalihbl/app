@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'your-nodejs-app:1.0'
+        DOCKER_IMAGE = 'your-nodejs-app'
+        VERSION = '1.0'
         REMOTE_SERVER = 'aaijaz@10.200.68.168'
         REMOTE_PATH = 'ALI/'
         REMOTE_PW = 'adeelteam'
@@ -18,13 +19,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %DOCKER_IMAGE% .'
+                bat 'docker build -t %DOCKER_IMAGE%:%VERSION% .'
             }
         }
 
         stage('Save Docker Image') {
             steps {
-                bat 'docker save %DOCKER_IMAGE% > %DOCKER_IMAGE%.tar.gz'
+                bat 'docker save %DOCKER_IMAGE%:%VERSION% | gzip -c > %DOCKER_IMAGE%.tar.gz'
             }
         }
 
