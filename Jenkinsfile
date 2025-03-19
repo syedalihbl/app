@@ -24,7 +24,7 @@ pipeline {
 
         stage('Save Docker Image') {
             steps {
-                bat 'docker save %DOCKER_IMAGE% > %DOCKER_IMAGE%.tar'
+                bat 'docker save %DOCKER_IMAGE% > %DOCKER_IMAGE%.tar.gz'
             }
         }
 
