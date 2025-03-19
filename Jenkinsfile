@@ -7,6 +7,7 @@ pipeline {
         REMOTE_SERVER = 'aaijaz@10.200.68.168'
         REMOTE_PATH = 'ALI/'
         REMOTE_PW = 'adeelteam'
+        KEY = 'C:\\Users\\systemlimited.tufail\\id_rsa'
     }
 
     stages {
@@ -32,22 +33,22 @@ pipeline {
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
                  
-                    bat 'pscp -i C:\\Users\\systemlimited.tufail\\id_rsa %DOCKER_IMAGE%.tar.gz %REMOTE_SERVER%:%REMOTE_PATH%'
-                    bat 'pscp -pw %REMOTE_PW% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
+                    bat 'scp -i %KEY% %DOCKER_IMAGE%.tar.gz %REMOTE_SERVER%:%REMOTE_PATH%'
+                    bat 'scp -i %KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
                 
             }
         }
 
         stage('Load Docker Image on Remote Server') {
             steps {
-                    bat 'pscp -pw %REMOTE_PW% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar.gz"'
+                    bat 'pscp -i %KEY% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar.gz"'
                 
             }
         }
 
         stage('Run Docker Compose') {
             steps {
-                    bat 'pscp -pw %REMOTE_PW% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
+                    bat 'pscp -i %KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
             }
         }
     }
