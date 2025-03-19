@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'your-nodejs-app'
+        DOCKER_IMAGE = 'your-nodejs-app:1.0'
         REMOTE_SERVER = 'aaijaz@10.200.68.168'
         REMOTE_PATH = 'ALI/'
         REMOTE_PW = 'adeelteam'
@@ -31,7 +31,7 @@ pipeline {
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
                  
-                    bat 'pscp -pw %REMOTE_PW% %DOCKER_IMAGE%.tar %REMOTE_SERVER%:%REMOTE_PATH%'
+                    bat 'pscp -pw %REMOTE_PW% %DOCKER_IMAGE%.tar.gz %REMOTE_SERVER%:%REMOTE_PATH%'
                     bat 'pscp -pw %REMOTE_PW% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
                 
             }
@@ -39,7 +39,7 @@ pipeline {
 
         stage('Load Docker Image on Remote Server') {
             steps {
-                    bat 'pscp -pw %REMOTE_PW% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar"'
+                    bat 'pscp -pw %REMOTE_PW% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar.gz"'
                 
             }
         }

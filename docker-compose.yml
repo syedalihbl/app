@@ -1,11 +1,15 @@
-version: '3'
+version: '1.0'
 services:
   app:
-    build: .
+    image: your-nodejs-app:1.0
+    container_name: testapp
+    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "9595:9156"
     volumes:
-      - ./:/app
+      - testapp:/app/logs
     environment:
+      - TZ=Asia/Karachi
       - NODE_ENV=development
-    command: npm start
+volumes:
+  testapp:
