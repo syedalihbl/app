@@ -32,10 +32,8 @@ pipeline {
 
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: '168', keyFileVariable: 'SSH_KEY')]) {
-                    bat '''
-                        scp -v -o StrictHostKeyChecking=no -i $SSH_KEY %DOCKER_IMAGE%.tar.gz %REMOTE_SERVER%:%REMOTE_PATH%
-                    '''
+                sshagent(['168']) {
+                    bat 'scp -v -o StrictHostKeyChecking=no your-nodejs-app.tar.gz aaijaz@10.200.68.168:ALI/'
                 }
                     bat 'scp -i %KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
                 
