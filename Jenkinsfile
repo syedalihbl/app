@@ -33,7 +33,7 @@ pipeline {
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
                  
-                    bat 'scp -i %KEY% %DOCKER_IMAGE%.tar.gz %REMOTE_SERVER%:%REMOTE_PATH%'
+                    bat 'scp -v -o StrictHostKeyChecking=no -i %KEY% %DOCKER_IMAGE%.tar.gz %REMOTE_SERVER%:%REMOTE_PATH%'
                     bat 'scp -i %KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
                 
             }
