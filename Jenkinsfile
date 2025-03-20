@@ -7,28 +7,10 @@ pipeline {
         REMOTE_SERVER = 'aaijaz@10.200.68.168'
         REMOTE_PATH = 'ALI/'
         REMOTE_PW = 'adeelteam'
-        KEY = 'C:\\Users\\systemlimited.tufail\\id_rsa'
+        KEY = 'SHA256:SKIoxDnVfXBOcCJivaeaqR2hfFlY75cOzxXP0ESrwro'
     }
 
     stages {
-
-
-        stage('Transfer Imagsse and Compose File to Remote Server') {
-            steps {
-                powershell '''
-                    $key = "C:\\Users\\systemlimited.tufail\\id_rsa"
-                    Write-Host "Using key: $key"
-                    # Test SSH connection first
-                    ssh -v -o StrictHostKeyChecking=no -i $key aaijaz@10.200.68.168 "echo Connection successful"
-                    # Then try SCP
-                    scp -v -o StrictHostKeyChecking=no -i $key C:\\Users\\systemlimited.tufail\\ACOP.log aaijaz@10.200.68.168:ALI/
-                '''
-            }
-        }
-
-
-
-
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/syedalihbl/app.git'
@@ -50,27 +32,24 @@ pipeline {
 
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
-                powershell '''
-                    $key = "C:\\Users\\systemlimited.tufail\\id_rsa"
-                    Write-Host "Using key: $key"
-                    # Test SSH connection first
-                    ssh -v -o StrictHostKeyChecking=no -i $key aaijaz@10.200.68.168 "echo Connection successful"
-                    # Then try SCP
-                    scp -v -o StrictHostKeyChecking=no -i $key your-nodejs-app.tar.gz aaijaz@10.200.68.168:ALI/
-                '''
+                sshagent(['168']) {
+                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% %DOCKER_IMAGE% %REMOTE_SERVER%:%REMOTE_PATH%'
+                }
+                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
+                
             }
         }
 
         stage('Load Docker Image on Remote Server') {
             steps {
-                    bat 'scp -i %KEY% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar.gz"'
+                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar.gz"'
                 
             }
         }
 
         stage('Run Docker Compose') {
             steps {
-                    bat 'scp -i %KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
+                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
             }
         }
     }
