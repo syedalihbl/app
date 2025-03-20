@@ -11,6 +11,24 @@ pipeline {
     }
 
     stages {
+
+
+        stage('Transfer Imagsse and Compose File to Remote Server') {
+            steps {
+                powershell '''
+                    $key = "C:\\Users\\systemlimited.tufail\\id_rsa"
+                    Write-Host "Using key: $key"
+                    # Test SSH connection first
+                    ssh -v -o StrictHostKeyChecking=no -i $key aaijaz@10.200.68.168 "echo Connection successful"
+                    # Then try SCP
+                    scp -v -o StrictHostKeyChecking=no -i $key C:\\Users\\systemlimited.tufail\\ACOP.log aaijaz@10.200.68.168:ALI/
+                '''
+            }
+        }
+
+
+
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/syedalihbl/app.git'
