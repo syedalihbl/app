@@ -41,14 +41,14 @@ pipeline {
 
         stage('Load Docker Image on Remote Server') {
             steps {
-                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar.gz"'
+                    bat 'plink -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker load < %REMOTE_PATH%/%DOCKER_IMAGE%.tar.gz"'
                 
             }
         }
 
         stage('Run Docker Compose') {
             steps {
-                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
+                    bat 'plink -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
             }
         }
     }
