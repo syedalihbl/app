@@ -14,6 +14,6 @@ COPY . /app
 
 VOLUME ["/app/logs"]
 
-CMD ["node", "/app/cluster.js"]
+CMD ["node", "/app/server.js"]
 
 EXPOSE 9156
