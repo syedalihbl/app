@@ -32,11 +32,14 @@ pipeline {
 
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
-                sshagent(['168']) {
-                    bat 'scp -v -o StrictHostKeyChecking=no your-nodejs-app.tar.gz aaijaz@10.200.68.168:ALI/'
-                }
-                    bat 'scp -i %KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
-                
+                powershell '''
+                    $key = "C:\\Users\\systemlimited.tufail\\id_rsa"
+                    Write-Host "Using key: $key"
+                    # Test SSH connection first
+                    ssh -v -o StrictHostKeyChecking=no -i $key aaijaz@10.200.68.168 "echo Connection successful"
+                    # Then try SCP
+                    scp -v -o StrictHostKeyChecking=no -i $key your-nodejs-app.tar.gz aaijaz@10.200.68.168:ALI/
+                '''
             }
         }
 
