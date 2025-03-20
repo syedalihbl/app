@@ -32,7 +32,7 @@ pipeline {
 
         stage('Transfer Image and Compose File to Remote Server') {
             steps {
-                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% %DOCKER_IMAGE% %REMOTE_SERVER%:%REMOTE_PATH%'
+                    bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% %DOCKER_IMAGE%.tar.gz %REMOTE_SERVER%:%REMOTE_PATH%'
     
                     bat 'pscp -pw %REMOTE_PW% -hostkey %KEY% docker-compose.yml %REMOTE_SERVER%:%REMOTE_PATH%'
                 
