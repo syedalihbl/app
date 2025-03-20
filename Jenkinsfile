@@ -48,7 +48,8 @@ pipeline {
 
         stage('Run Docker Compose') {
             steps {
-                    bat 'plink -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
+                    bat 'plink -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker container run --name testapp --restart unless-stopped -e TZ=Asia/Karachi -v testapp:/app/logs -d -p 9595:9156 %DOCKER_IMAGE%:1.0"'
+                    // bat 'plink -pw %REMOTE_PW% -hostkey %KEY% %REMOTE_SERVER% "docker-compose -f %REMOTE_PATH%/docker-compose.yml up -d"'
             }
         }
     }
