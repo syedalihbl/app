@@ -11,12 +11,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/syedalihbl/app.git'
-            }
-        }
-
+        // stage('Checkout') {
+        //     steps {
+        //         git branch: 'main', url: 'https://github.com/syedalihbl/app.git'
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {
